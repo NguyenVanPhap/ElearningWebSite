@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+
+<head>
+	<meta charset="ISO-8859-1">
+	<title>Danh sách bài Vocab</title>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+	<meta charset="utf-8" />
+	<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+	<!-- Mobile Metas -->
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+	<!-- Site Metas -->
+	<meta name="keywords" content="" />
+	<meta name="description" content="" />
+	<meta name="author" content="" />
+
+
+	<script th:src="@{/js/html5shiv.js}"></script>
+	<!-- bootstrap core css -->
+	<link rel="stylesheet" type="text/css" th:href="@{/css/bootstrap.css}" />
+	<!-- progress barstle -->
+	<link rel="stylesheet" th:href="@{/css/css-circular-prog-bar.css}">
+	<!-- fonts style -->
+	<link href="https://fonts.googleapis.com/css?family=Poppins:400,700&display=swap" rel="stylesheet">
+	<!-- font wesome stylesheet -->
+	<link rel="stylesheet" th:href="@{https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css}">
+	<!-- Custom styles for this template -->
+	<!-- responsive style -->
+	<link th:href="@{/css/responsive.css}" rel="stylesheet" />
+	<link rel="stylesheet" th:href="@{/css/css-circular-prog-bar.css}">
+	<link rel="stylesheet" th:href="@{/css/header/header.css}">
+
+	<link th:href="@{/css/style.css}" rel="stylesheet" />
+
+	<script th:src="@{/js/jquery-1.js}"></script>
+
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
+		integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+
+	<script type="text/javascript" th:src="@{/js/jquery-3.4.1.min.js}"></script>
+	<style type="text/css">
+		.myli li::marker {
+			content: "› ";
+			color: hotpink;
+		}
+
+		.hidden {
+			display: none;
+		}
+
+		.error-message {
+			color: red;
+		}
+
+		.anchor {
+			display: block;
+			height: 115px;
+			/*same height as header*/
+			margin-top: -115px;
+			/*same height as header*/
+			visibility: hidden;
+		}
+
+		.imageVocab {
+			float: left;
+			height: 150px;
+			width: 250px;
+			margin-bottom: 25px;
+		}
+	</style>
+	<script type="text/javascript">
+		function SearchVocab() {
+
+			var baseUrl = document.getElementById('baseUrl').value;
+			var xhttp;
+			var search = document.getElementById('searchVocab').value;
+
+			//remove special letters
+			var convertSearch = search.replace(/[^a-zA-Z0-9 ]/g, "");
+
+			var url;
+			if (!search == ' ') {
+				url = baseUrl + "/searchVocab/" + convertSearch;
+			}
+			else url = baseUrl + "/searchVocab/all";
+
+
+			if (window.XMLHttpRequest) {
+				xhttp = new XMLHttpRequest();
+			}
+			else {
+				xhttp = new ActiveXObject("Microsoft.XMLHTTP");
+			}
+
+			xhttp.onreadystatechange = function () {
+				if (xhttp.readyState == 4) {
+					var data = xhttp.responseText;
+					document.getElementById("resultsearchVocab").innerHTML = data;
+				}
+			}
+
+			xhttp.open("POST", url, true);
+			xhttp.send();
+		}
+	</script>
+
+
+</head>
+
+
+<body>
+
+
+	<div th:replace="client/include/header::header"> </div>
+	<input style="display:none;" id="baseUrl" value="${pageContext.request.contextPath}" />
+
+
+	<div class="container mybackground">
+		<!--PAGE TITLE-->
+		<div>
+			<div class="row">
+				<div class="col-sm-9">
+					<h4 class="pagetitle">TỪ VỰNG TOEIC</h4>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-sm-9">
+
+					<div>
+						<input type="text" class="form-control" id="searchVocab" placeholder="Tìm kiếm bài vocab..."
+							style="width: 400px; margin-top:6px;" name="search" onkeyup="SearchVocab()">
+					</div>
+
+				</div>
+			</div>
+		</div>
+		<hr class="myhr">
+		<!-- /. PAGE TITLE-->
+		<div id="resultsearchVocab">
+
+			<div class="row">
+				<div class="col-sm-9">
+					<th:block th:if="${#lists.size(listData) == 0 }">
+						<h3>Không tìm thấy dữ liệu</h3>
+					</th:block>
+					<th:block th:each="list : ${listData}">
+						<div class="span5" >
+							<table>
+								<tr>
+									<td>
+										<img class="imageVocab" th:src="@{/static/file/images/vocab/}+${list.getImage()}">
+									</td>
+									<td>
+										<div class="lead">
+											<h6 th:text="${list.getVocabularyName}"></h4>
+										</div>
+										<div>
+											<a th:href="@{/detailVocab?idVocab=}+${list.getVocabularyId}" class="btn btn-primary">Chi tiết</a>
+										</div>
+									</td>
+								</tr>
+							</table>							
+						</div>						
+					</th:block>				
+					<br>
+				</div>
+				<div class="col-sm-3">
+					<div th:replace="client/include/sidebar::sidebar"> </div>
+					<!--<div class="side-bar" style="padding-left: 0px;height:100%">
+
+						<h5>DANH MỤC</h5>
+						
+						<table style="padding-left: 0px;height:100% ">
+							<tr>
+								<td style="width:5% ;background-color: gainsboro;"></td>
+								<td style="vertical-align:top">
+									<ul class="nav-list" style="">
+										<li class="myli" ><a href="/webtoeic/listening">Luyện bài nghe</a></li>
+										<li class="myli"><a href="/webtoeic/reading">Luyện bài đọc</a> <br></li>
+										<li class="myli"><a href="/webtoeic/listExam">Bài thi thử</a></li>
+										<li class="myli"><a href="/webtoeic/listGrammar">Học ngữ pháp</a></li>
+										<li class="myli"><a href="/webtoeic/listVocab">Học từ vựng</a></li>
+									</ul>
+								</td>
+							</tr>
+						</table>
+						
+					</div>-->
+				</div>
+			</div>
+
+			<!--Pagination-->
+			<th:block th:if="${listData.size() != 0}">
+			
+				<div class="paging">
+					
+					<a class="page" style ="background-color: gray;" th:if="${listData.size() != 0}" th:href="@{/listVocab?page=}+${currentPage-1}">Back</a>
+					<a  th:if="${currentPage == 1}"class="current page">1</a>
+					<a class="page" th:if ="${currentPage != 1}" th:href="@{/listVocab?page=1}">1</a>
+					<th:block th:each="pag : ${pageList}">
+						<a th:if ="${currentPage == pag}"  class="current page" th:text="${pag}"></a>
+						<a th:if ="${currentPage != pag}" th:href="@{/listVocab?page=}+${pag}" th:text="${pag}"></a>
+					</th:block>
+					<a style ="background-color: gray;" th:if="${currentPage != totalPage}" th:href="@{/listVocab?page=}+${currentPage+1}" class="pageNext page">Next</a>
+
+				</div>
+			</th:block>
+			
+			
+		<hr class="myhr">
+		<br>
+		</div>
+
+		<!--/.End Pagination-->
+	</div>
+	</div>
+	<br>
+	<br>
+		<!-- footer section -->
+	<section class="">
+		<div th:replace="client/include/footer::footer"> </div>
+	</section>
+	<!-- footer section -->
+</body>
+
+</html>

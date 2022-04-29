@@ -1,0 +1,288 @@
+<!--<c:url value="${pageContext.request.contextPath}/resources" var="url"></c:url>-->
+
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity">
+
+<head>
+	<!-- Basic -->
+	<meta charset="utf-8" />
+	<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+	<!-- Mobile Metas -->
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+	<!-- Site Metas -->
+	<meta name="keywords" content="" />
+	<meta name="description" content="" />
+	<meta name="author" content="" />
+	<title>Toeic mỗi ngày</title>
+	<!-- bootstrap core css -->
+	<link rel="stylesheet" type="text/css" th:href="@{/css/bootstrap.css}" />
+	<!-- progress barstle -->
+	<link rel="stylesheet" th:href="@{/css/css-circular-prog-bar.css}">
+	<!-- fonts style -->
+	<link href="https://fonts.googleapis.com/css?family=Poppins:400,700&display=swap" rel="stylesheet">
+	<!-- font wesome stylesheet -->
+	<link rel="stylesheet" th:href="@{https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css}">
+	<link th:href="@{/css/responsive.css}" rel="stylesheet" />
+	<link th:href="@{/css/slick.css}" rel="stylesheet" />
+	<link rel="stylesheet" th:href="@{/css/css-circular-prog-bar.css}">
+	<link rel="stylesheet" th:href="@{/css/header/header.css}">
+	<link th:href="@{/css/style.css}" rel="stylesheet" />
+	<script th:src="@{/js/jquery-1.js}"></script>
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
+		integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+	<script type="text/javascript" th:src="@{/js/jquery-3.4.1.min.js}"></script>
+
+	<style type="text/css">
+		a:link {
+			color: black;
+		}
+	</style>
+
+</head>
+
+<body>
+
+	<header>
+		<div th:replace="client/include/header::header"> </div>
+	</header>
+	<!-- <jsp:include page="/WEB-INF/pages/client/include/header.jsp"></jsp:include> -->
+
+
+	<!-- Start Slider -->
+	<section id="mu-slider">
+		<!-- Start single slider item -->
+		<div class="mu-slider-single">
+			<div class="mu-slider-img">
+				<figure>
+					<!--<img src="assets/img/slider/1.jpg" alt="img">-->
+				</figure>
+			</div>
+			<div class="mu-slider-content">
+				<!--<h4>Thành quả của học viên</h4>-->
+				<span></span>
+				<h2>Thành quả của học viên</h2>
+				<p>Để đạt được kết quả tốt trong mọi việc ta cần xác định mục tiêu rõ ràng cho việc đó. Học ngoại ngữ
+					cũng không là ngoại lệ</p>
+				<a href="#" class="mu-read-more-btn">Xem thành quả</a>
+			</div>
+		</div>
+		<!-- Start single slider item -->
+		<!-- Start single slider item -->
+		<div class="mu-slider-single">
+			<div class="mu-slider-img">
+				<figure>
+					<!--<img src="assets/img/slider/2.jpg" alt="img">-->
+				</figure>
+			</div>
+			<div class="mu-slider-content">
+				<h4>Premiumu Quality Free Template</h4>
+				<span></span>
+				<h2>Best Education Template Ever</h2>
+				<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Dolor amet error eius reiciendis eum sint
+					unde eveniet deserunt est debitis corporis temporibus recusandae accusamus.</p>
+				<a href="#" class="mu-read-more-btn">Read More</a>
+			</div>
+		</div>
+		<!-- Start single slider item -->
+	</section>
+	<!-- End Slider -->
+	<!--<!-- end header section -->
+	<!-- vehicle section -->
+	<!--<section class="vehicle_section layout_padding" style="padding-top: 0px;">
+		<div class="container-fluid">
+			<div class="layout_padding-top" style="padding-top: 0px;">
+				<div id="carouselExampleControls" class="carousel slide" data-ride="carousel">
+					<div class="carousel-inner">
+
+						<div class="carousel-item active">
+							<div class="vehicle_img-box ">
+								<div class="container">
+									<div class="row">
+										<div class="col">
+											<img th:src="@{/images/lovetolearn.png}" alt=""
+												class="img-fluid w-100 carousel-img">
+										</div>
+										<div class="col">
+
+											<p class="lead">Đào tạo chất lượng</p>
+											<p class="lead">Chúng tôi cung cấp cho các bạn những kiến
+												thức tốt nhất.</p>
+											<a class="btn btn-large btn-primary" data-toggle="modal"
+												data-target="#openModal">Xem
+												ngay</a>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="carousel-item">
+							<div class="vehicle_img-box ">
+								<div class="container">
+									<div class="row">
+										<div class="col">
+											<img th:src="@{/images/english-text.jpg}" alt=""
+												class="img-fluid w-100 carousel-img">
+										</div>
+										<div class="col">
+
+											<p class="lead">Bài Tập Reading, Listening</p>
+											<p class="lead">Chúng tôi cung cấp cho các bạn các dạng bài tập hay, bổ ích.
+											</p>
+											<a class="btn btn-large btn-primary openModalFunction" data-toggle="modal"
+												data-target="#openModal">Xem
+												ngay</a>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+					<a class="carousel-control-prev" href="#carouselExampleControls" role="button" data-slide="prev">
+						<span class="carousel-control-prev-icon" aria-hidden="true"></span>
+						<span class="sr-only">Previous</span>
+					</a>
+					<a class="carousel-control-next" href="#carouselExampleControls" role="button" data-slide="next">
+						<span class="carousel-control-next-icon" aria-hidden="true"></span>
+						<span class="sr-only">Next</span>
+					</a>
+				</div>
+			</div>
+
+		</div>
+	</section>-->
+
+
+	<!-- Start service  -->
+	<section id="mu-service">
+		<div class="container">
+			<div class="row">
+				<div class="col-lg-12 col-md-12">
+					<div class="mu-service-area">
+						<!-- Start single service -->
+						<div class="mu-service-single">
+							<span class="fa fa-book"></span>
+							<h3>Learn Online</h3>
+						</div>
+						<!-- Start single service -->
+						<!-- Start single service -->
+						<div class="mu-service-single">
+							<span class="fa fa-users"></span>
+							<h3>Expert Teachers</h3>
+						</div>
+						<!-- Start single service -->
+						<!-- Start single service -->
+						<div class="mu-service-single">
+							<span class="fa fa-table"></span>
+							<h3>Best Classrooms</h3>
+						</div>
+						<!-- Start single service -->
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+	<!-- End service  -->
+
+	<!-- Start about us -->
+	<section id="mu-about-us">
+		<div class="container">
+			<div class="row">
+				<div class="col-md-12">
+					<div class="mu-about-us-area">
+						<div class="row">
+							<div class="col-lg-6 col-md-6">
+								<div class="mu-about-us-left">
+									<!-- Start Title -->
+									<div class="mu-title">
+										<h2>About Us</h2>
+									</div>
+									<!-- End Title -->
+									<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Rerum pariatur fuga
+										eveniet soluta aspernatur rem, nam voluptatibus voluptate voluptates sapiente,
+										inventore. Voluptatem, maiores esse molestiae.</p>
+									<ul>
+										<li>Lorem ipsum dolor sit amet, consectetur adipisicing elit.</li>
+										<li>Saepe a minima quod iste libero rerum dicta!</li>
+										<li>Voluptas obcaecati, iste porro fugit soluta consequuntur. Veritatis?</li>
+										<li>Ipsam deserunt numquam ad error rem unde, omnis.</li>
+										<li>Repellat assumenda adipisci pariatur ipsam eos similique, explicabo.</li>
+									</ul>
+									<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Perspiciatis quaerat
+										harum facilis excepturi et? Mollitia!</p>
+								</div>
+							</div>
+							<div class="col-lg-6 col-md-6">
+								<div class="mu-about-us-right">
+									<a id="mu-abtus-video" href="https://www.youtube.com/embed/HN3pm9qYAUs"
+										target="mutube-video">
+										<img src="assets/img/about-us.jpg" alt="img">
+									</a>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+	<!-- End about us -->
+
+	<!-- Start Modal -->
+
+	<div style="background-color: rgba(0,0,0,0.5);" class="modal fade" id="openModal" aria-labelledby="largeModal"
+		role="dialog">
+		<div class="modal-dialog">
+
+			<!-- Modal content -->
+			<div class="modal-content">
+				<div class="modal-header">
+					<h6 class="modal-title">DANH SÁCH LOẠT BÀI HƯỚNG DẪN</h6>
+				</div>
+
+				<div class="modal-body">
+
+					<div class="media">
+						<a class="pull-left"><img src="" class="media-object" /></a>
+						<div class="media-body">
+
+							<a class="nav-link" style="color: black;" th:href="@{/listGrammar}">Bài giảng ngữ pháp</a>
+
+						</div>
+					</div>
+
+					<div class="media">
+						<a class="pull-left"><img src="" class="media-object" /></a>
+						<div class="media-body">
+
+							<a class="nav-link" style="color: black;" th:href="@{/listVocab}"> Bài giảng từ vựng</a>
+
+						</div>
+					</div>
+
+				</div>
+
+				<div class="modal-footer">
+					<button type="button" class="btn btn-primary" data-dismiss="modal">Thoát</button>
+				</div>
+
+			</div>
+		</div>
+	</div>
+	<!-- End Modal -->
+
+
+	<!-- footer section -->
+	<section class="">
+		<div th:replace="client/include/footer::footer"> </div>
+	</section>
+	<!-- footer section -->
+
+	<!-- Custom js -->
+	<script th:src="@{/css/assets/js/custom.js}"></script>
+	<script type="text/javascript" th:src="@{/css/assets/js/slick.js}"></script>
+</body>
+
+</html>

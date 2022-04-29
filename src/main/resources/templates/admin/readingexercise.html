@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+
+<head>
+	<meta charset="ISO-8859-1">
+	<title>Quản lý bài tập đọc</title>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+	<script th:src="@{/js/jquery-1.js}"></script>
+	<link rel="stylesheet" th:href="@{/css/admin.css}" />
+
+	<link rel="stylesheet" th:href="@{/css/ace.min.css}" class="ace-main-stylesheet" id="main-ace-style" />
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/simplemde/latest/simplemde.min.css">
+	<script src="https://cdn.jsdelivr.net/simplemde/latest/simplemde.min.js"></script>
+
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
+		integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+	<script src="https://stackpath.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+	<script th:src="@{/plugin/ckeditor/ckeditor.js}"></script>
+	<!-- fonts style -->
+	<link href="https://fonts.googleapis.com/css?family=Poppins:400,700&display=swap" rel="stylesheet">
+	<link rel="stylesheet" th:href="@{https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css}">
+	<link th:href="@{/css/responsive.css}" rel="stylesheet" />
+	<link th:href="@{/css/adminheader.css}" rel="stylesheet" />
+	<style type="text/css">
+		.hidden {
+			display: none;
+		}
+
+		.error-message {
+			color: red;
+		}
+
+		.center {
+			text-align: center;
+		}
+
+		.pagination {
+			display: inline-block;
+		}
+
+		.pagination a {
+			color: black;
+			float: left;
+			padding: 8px 16px;
+			text-decoration: none;
+			transition: background-color .3s;
+			border: 1px solid #ddd;
+			margin: 0 4px;
+		}
+
+		.pagination a.active {
+			background-color: #4CAF50;
+			color: white;
+			border: 1px solid #4CAF50;
+		}
+
+		.pagination a:hover:not(.active) {
+			background-color: #ddd;
+		}
+
+		.myparent {
+			white-space: nowrap;
+		}
+
+		.mychild {
+			display: inline;
+			float: left;
+			padding-right: 2%
+		}
+	</style>
+</head>
+
+<body>
+	<header>
+		<div th:replace="admin/include/header::header"> </div>
+	</header>
+	<div class="container-fluid">
+
+		<div class="col-md-1"></div>
+		<div class="col-md-10 animated bounce">
+
+			<h1>Quản lý bài đọc</h1>
+
+
+			<button class="addReadingExercise" style=" background-color: #4CAF50; color: white;
+				border: 1px solid #4CAF50;">Thêm mới</button>
+			<hr />
+
+			<form class="form-inline" id="searchForm" name="searchObject">
+
+				<div class="form-group">
+					<select class="form-control" name="partSearch" id="partSearch">
+						<option value="">Tất cả</option>
+						<option value="5">Part 5</option>
+						<option value="6">Part 6</option>
+						<option value="7">Part 7</option>
+					</select>
+				</div>&nbsp;&nbsp;
+				<div class="form-group">
+					<select class="form-control" name="lvlSearch" id="lvlSearch">
+						<option value="">Tất cả</option>
+						<option value="1">350-500</option>
+						<option value="2">500-700</option>
+						<option value="3">700-900</option>
+					</select>
+				</div>
+				&nbsp;&nbsp;
+				<button type="button" class="btn btn-primary" id="btnDuyetBaiDoc">Duyệt Bài đọc</button>
+			</form>
+
+			<div class="form-group form-inline"
+				style="float: right; margin-right: 10px; top: -47px; position: relative;">
+				<input class="form-control" type="text" id="searchById" placeholder="Nhập mã để tìm nhanh"> <span
+					class="glyphicon glyphicon-search" aria-hidden="true" style="left: -30px; top: 4px;"></span>
+			</div>
+
+			<hr />
+
+			<table class="table table-hover baiDocTable">
+				<thead>
+					<tr class="center">
+						<th>ID</th>
+						<th>Tên bài đọc</th>
+						<th>Part LC</th>
+						<th>Độ khó</th>
+						<th>Thao tác</th>
+					</tr>
+				</thead>
+				<tbody>
+				</tbody>
+
+			</table>
+
+			<div class="center">
+				<div class="pagination">
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<div class="row col-md-6">
+		<form class="readingExerciseForm" id="formReadingExercise" enctype="multipart/form-data">
+
+			<div>
+				<div class="modal fade" id="baiDocModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+					aria-hidden="true" data-backdrop="static" data-keyboard="false">
+					<div class="modal-dialog" role="document">
+						<div class="modal-content">
+							<div class="modal-header">
+								<h5 class="modal-title" id="exampleModalLabel">Tạo mới/Cập nhật bài đọc</h5>
+								<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+									<span aria-hidden="true">&times;</span>
+								</button>
+							</div>
+							<div class="modal-body">
+								<div class="form-group">
+									<input type="hidden" class="form-control" id="id" name="id" />
+								</div>
+								<div class="form-group">
+									<label for="name">Tên bài đọc:</label>
+									<input type="text" class="form-control" id="readingExerciseName" name="name"
+										placeholder="Nhập vào tên bài đọc" required>
+								</div>
+
+								<div class="form-group">
+									<label for="name">Phần thi (Part)</label>
+									<select id="partToeic" class="form-control" name="part">
+										<!-- 									    <option value="PART5_COMPLETE_SENTENCE">Part 5-Complete sentence</option>
+                                        <option value="PART6_COMPLETE_THE_PARAGRAPH">Part 6-Complete the paragraph</option>
+                                        <option value="PART7_READING_COMPREHENSION">Part 7-Reading comprehension</option> -->
+										<option value="5">Part 5-Complete sentence</option>
+										<option value="6">Part 6-Complete the paragraph</option>
+										<option value="7">Part 7-Reading comprehension</option>
+									</select>
+								</div>
+
+								<div class="form-group">
+									<label for="name">Level</label>
+									<select name="level" id="level" class="form-control">
+										<option value="1">350-500</option>
+										<option value="2">500-700</option>
+										<option value="3">700-900</option>
+									</select>
+								</div>
+
+								<div class="form-group">
+									<label for="name">File Ảnh</label>
+									<input type="file" class="form-control" id="readingExerciseImage" name="image"
+										required>
+									<img alt="" src="" class="hidden" id="previewImage"
+										style="height: 100px; width: 165px">
+
+								</div>
+
+
+								<div class="form-group">
+									<label for="name">Danh sách câu hỏi (Excel):</label>
+									<input type="file" class="form-control" id="fileExel" name="fileExcel" required>
+								</div>
+
+								<div class="form-group">
+									<label for="name">Mô tả phần đọc (Script): </label>
+									<textarea class="form-control" id="script" name="script"></textarea>
+								</div>
+
+								<div class="modal-footer">
+									<button type="button" class="btn btn-secondary" data-dismiss="modal">Hủy</button>
+									<input class="btn btn-primary" id="btnSubmit" type="button" value="Xác nhận" />
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</form>
+	</div>
+
+	<script src="http://ajax.aspnetcdn.com/ajax/jquery.validate/1.11.1/jquery.validate.min.js"></script>
+	<script th:src="@{/js/admin/readingexercisemanagement.js}"></script>
+</body>
+
+</html>

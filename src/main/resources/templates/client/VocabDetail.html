@@ -1,0 +1,234 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity">
+
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+	<title>Hướng dẫn từ vựng chi tiết</title>
+
+
+	<script th:src="@{/js/html5shiv.js}"></script>
+
+	<!-- bootstrap core css -->
+	<link rel="stylesheet" type="text/css" th:href="@{/css/bootstrap.css}" />
+	<!-- progress barstle -->
+	<link rel="stylesheet" th:href="@{/css/css-circular-prog-bar.css}">
+	<!-- fonts style -->
+	<link href="https://fonts.googleapis.com/css?family=Poppins:400,700&display=swap" rel="stylesheet">
+	<!-- font wesome stylesheet -->
+	<link rel="stylesheet" th:href="@{https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css}">
+	<!-- Custom styles for this template -->
+	<!-- responsive style -->
+	<link th:href="@{/css/responsive.css}" rel="stylesheet" />
+	<link rel="stylesheet" th:href="@{/css/css-circular-prog-bar.css}">
+
+	<link rel="stylesheet" th:href="@{/css/header/header.css}">
+
+	<link th:href="@{/css/style.css}" rel="stylesheet" />
+
+	<script th:src="@{/js/jquery-1.js}"></script>
+
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
+		integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+
+	<script type="text/javascript" th:src="@{/js/jquery-3.4.1.min.js}"></script>
+
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js"></script>
+	<script th:src="@{/js/client/commentvocab.js}"></script>
+	<script th:src="@{/js/client/momentcmt.js}"></script>
+	<style type="text/css">
+		.showtext {
+			text-align: auto;
+			padding-top: 0.5em;
+			padding-right: 1em;
+			padding-bottom: 0.5em;
+			padding-left: 1em;
+		}
+		.circle{
+			/* border: 1px #d4d4d4 solid; */
+			padding: 7px;
+			border-radius:50%;
+			-moz-border-radius:50%;
+			-webkit-border-radius:50%;
+		}
+	</style>
+</head>
+
+<body>
+
+	<!--Header
+==========================-->
+
+	<div th:replace="client/include/header::header"> </div>
+	<input id="baseUrl" value="${pageContext.request.contextPath}" style="display: none;" />
+	<!--/End Headter-->
+
+	<!-- Page container -->
+
+	<div class="container mybackground">
+		<!--PAGE TITLE-->
+
+		<div class="row">
+			<div class="span12">
+				<div class="page-header">
+					<h4 class="pagetitle">Bài hướng dẫn học từ vựng</h4>
+				</div>
+			</div>
+		</div>
+		<h2 style="text-align: center" th:text="${vocab.getVocabularyName()}">Chủ đề:</h2>
+		<!-- -->
+		<div class="postmetadata">
+			<ul>
+				<li><i class="icon-user"></i> <a href="#">IT-HCMUTE</a></li>
+				<li><i class="icon-calendar"></i><a href="#">October, 2021</a></li>
+
+			</ul>
+		</div>
+		<!-- /. PAGE TITLE-->
+		<div class="row">
+			<div class="col-sm-1">.</div>
+			<div class="col-sm-8">
+				<div class="blog-post">
+
+
+					<!--<img
+	                        src="${pageContext.request.contextPath}/resources/static/images/vocabulary.jpg"
+	                        style="height: 330px; width: 870px">-->
+
+
+
+					<th:block th:each="list : ${listCauHoi}">
+						<div class="span5">
+
+						</div>
+						<div class="row">
+
+							<div class="span6">
+								<h3 th:text="${list.getNumber()}"></h3>
+								<h4 th:text="${list.getContent()}">
+								</h4>
+
+
+								<img th:src="@{/static/file/images/vocab/}+${list.getImage()}" alt="image not found"
+									style="height: 210px; width: 300px;" />
+								<p>
+									<b>NAmE:</b> &nbsp; <span style="color: red"
+										th:text="${list.getTranscribe()}"></span>
+								</p>
+
+								<p>
+									<b>Từ loại </b><span th:text="${list.getMeaning()}"></span>
+								</p>
+
+								<p>
+									<b>Ví dụ: </b><span th:text="${list.getSentence()}"></span>
+								</p>
+
+								<audio controls>
+									<source th:src="@{/static/file/audio/vocab/}+${list.getAudiomp3()}"
+										type="audio/wav">
+								</audio>
+
+								<br>
+
+							</div>
+
+
+
+						</div>
+						<br>
+						<hr>
+					</th:block>
+
+				</div>
+
+
+			</div>
+
+			<!--/End Blog Post-->
+
+			<div class="col-sm-3">
+				<div th:replace="client/include/sidebar::sidebar"> </div>
+			</div>
+		</div>
+	</div>
+			<!-- Start Comment -->
+	<div class="row">
+
+			<th:block sec:authorize="isAnonymous()">
+				<form>
+					<fieldset>
+						<h3>Bình luận</h3>
+
+						<textarea class="form-control" rows="2" cols="100"
+							placeholder="Viết bình luận đánh giá về bài đăng này..." name="comment" disabled
+							style="text-align: left;">Đăng nhập để bình luận bài viết
+						</textarea>
+						<br>
+						<button type="button" class="btn btn-primary" disabled>Đăng
+							bình luận</button>
+					</fieldset>
+
+				</form>
+
+			</th:block>
+
+
+
+
+			<th:block sec:authorize="isAuthenticated()">
+				<!--  	<input type="hidden" id="user_id" name="user_id" value="${currentUser.id}"/> -->
+				<input type="hidden" id="id_bai_vocab" value="${vocabularyid}" />
+
+				<div class="blog-spot">
+					<div>
+						<h3>Bình luận</h3>
+						<textarea id="contentComment" class="form-control" rows="2" cols="100" name="contentComment"
+							placeholder="Viết bình luận đánh giá về bài đăng này..."></textarea>
+
+					</div>
+					<br>
+					<div>
+						<button id="btnComment" type="button" class="btn btn-primary">Đăng
+							bình luận</button>
+					</div>
+				</div>
+			</th:block>
+			<!-- Nội dung commnetn -->
+			<h1 id="testajax"></h1>
+	</div>
+
+		<div class="row">
+			<div class="col-md-10">
+				<table class="table table-hover " id="tableVocab">
+					<tbody id="lstcommentvocab">
+					</tbody>
+				</table>
+			</div>
+		</div>
+		<!-- End Comment -->
+		<!-- End Page Container -->
+		<br>
+		<br>
+	<script>
+		window.onload = function(){
+			let dates = document.querySelectorAll(".my-date > i")
+			for (let i = 0; i< dates.length; i++){
+				let d = dates[i]
+				d.innerText = moment(d.innerText).fromNow()
+			}
+		}
+	</script>
+	<!-- footer section -->
+	<section class="">
+		<div th:replace="client/include/footer::footer"> </div>
+	</section>
+	<!-- footer section -->
+
+
+</body>
+
+</html>

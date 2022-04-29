@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+
+<head>
+	<meta charset="ISO-8859-1">
+	<title>Quản lý Grammar</title>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+	<script th:src="@{/js/jquery-1.js}"></script>
+	<link rel="stylesheet" th:href="@{/css/admin.css}" />
+
+	<link rel="stylesheet" th:href="@{/css/ace.min.css}" class="ace-main-stylesheet" id="main-ace-style" />
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/simplemde/latest/simplemde.min.css">
+	<script src="https://cdn.jsdelivr.net/simplemde/latest/simplemde.min.js"></script>
+
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
+		integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+
+	<script th:src="@{/js/admin/quanLyGrammar.js}"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+	<script src="https://stackpath.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+	<script th:src="@{/plugin/ckeditor/ckeditor.js}"></script>
+	<!-- fonts style -->
+	<link href="https://fonts.googleapis.com/css?family=Poppins:400,700&display=swap" rel="stylesheet">
+	<link rel="stylesheet" th:href="@{https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css}">
+	<link th:href="@{/css/responsive.css}" rel="stylesheet" />
+	<link th:href="@{/css/adminheader.css}" rel="stylesheet" />
+	<!--<link rel="stylesheet" th:href="@{/css/css-circular-prog-bar.css}">-->
+	<style type="text/css">
+		.center {
+			text-align: center;
+		}
+
+		.pagination {
+			display: inline-block;
+		}
+
+		.pagination a {
+			color: black;
+			float: left;
+			padding: 8px 16px;
+			text-decoration: none;
+			transition: background-color .3s;
+			border: 1px solid #ddd;
+			margin: 0 4px;
+		}
+
+		.pagination a.active {
+			background-color: #4CAF50;
+			color: white;
+			border: 1px solid #4CAF50;
+		}
+
+		.pagination a:hover:not(.active) {
+			background-color: #ddd;
+		}
+
+		.myparent {
+			white-space: nowrap;
+		}
+
+		.mychild {
+			display: inline;
+			float: left;
+			padding-right: 2%
+		}
+	</style>
+</head>
+
+<body>
+	<header>
+		<div th:replace="admin/include/header::header"> </div>
+	</header>
+
+
+	<div class="container-fluid">
+
+		<div class="col-md-1"></div>
+		<div class="col-md-10 animated bounce">
+
+			<h1>Quản lý bài hướng dẫn Grammar</h1>
+
+			<button class="btnAddnewGram" style="background-color: #4CAF50;
+			color: white;
+			border: 1px solid #4CAF50;" data-toggle="modal" data-target="#grammarModal">Thêm
+				mới</button>
+			<!--<h4 style="color: red" id="info-success"></h4>-->
+			<hr />
+
+
+			<div class="myparent">
+				<!--<div class="form-group form-inline mychild">
+					<select id="level" class="form-control">
+						<option value="1">300-500</option>
+						<option value="2">500-700</option>
+						<option value="3">700-900</option>
+					</select>
+				</div>-->
+
+				<div class="form-group d-flex mychild" style="width: 30%">
+					<input type="text" class="form-control pl-3" id="searchkeyword" placeholder="vui lòng nhập tên bài giảng">
+					<button type="submit" style="width:20%" placeholder="" class="searchkeyword form-control search"><span
+							class="fa fa-search"></span></button>
+				</div>
+			</div>
+			<table class="table table-hover gmrTable" id="tableGrammar">
+				<thead>
+					<tr>
+						<th class="center">ID</th>
+						<th class="center">Tên bài Grammar </th>
+						<th class="center">Ảnh</th>
+						
+					</tr>
+				</thead>
+				<tbody>
+				</tbody>
+			</table>
+			<div class="center">
+				<div class="pagination">
+					<!--<a href="#">&laquo;</a>
+					<a href="#">1</a>
+					<a href="#" class="active">2</a>
+					<a href="#">3</a>
+					<a href="#">4</a>
+					<a href="#">5</a>
+					<a href="#">6</a>
+					<a href="#">&raquo;</a>-->
+				</div>
+			</div>
+
+		</div>
+
+
+
+		<!-- Modal -->
+		<div class="modal fade" id="grammarModal" style="background-color: transparent;" role="dialog"
+			aria-labelleby="myModalLable">
+			<div class="modal-dialog modal-lg" role="document">
+				<div class="modal-content">
+					<div class="modal-header">
+						<h4 class="modal-title" style="position: absolute;left: 0px;" id="titleModal">Thêm mới bài
+							Grammar</h4>
+						<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+							<span aria-hidden="true">&times;</span>
+						</button>
+					</div>
+
+					<div class="modal-body">
+						<input style="display:none" id="idGrammarModal">
+
+						<div class="row">
+							<span class="bg-danger" id="vocab_errors"></span>
+
+							<div class="form-group col-md-6">
+								<label>Tên bài grammar</label> <input id="nameGrammar" class="form-control">
+
+							</div>
+							<div class="form-group col-md-6">
+								<label for="imageGrammar">Hình ảnh:</label>
+								<input type="file" title="Click to upload image" class="form-control"
+									id="file_imageGrammar" name="file_imageGrammar" accept="image/*"
+									onchange="showMyImage(this)" required />
+								<!--<label for="file_imageGrammar">Click to upload image</label>-->
+								<img alt="" src="" class="" id="previewImage" style="height: 100px; width: 150px">
+							</div>
+							<div class="form-group col-md-12">
+								<label for="contenGramar">Chỉnh sửa nội dung bài Grammar:</label>
+
+								<textarea id="myckeditor" name="myckeditor" cols="80" rows="10">
+
+								</textarea>
+							</div>
+						</div>
+					</div>
+
+					<div class="modal-footer">
+						<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+						<button type="button" id="btnAddNewGrammar" class="btn btn-primary">Xác nhận</button>
+						<button type="button" style="display:none;" id="btnUpdate" class="btn btn-primary">Cập
+							nhật</button>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<script>
+		CKEDITOR.replace('myckeditor', {
+			height: "800px"
+		});
+	</script>
+</body>
+
+</html>

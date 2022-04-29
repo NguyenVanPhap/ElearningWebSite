@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity">
+
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Document</title>
+</head>
+
+<body>
+
+	<div th:fragment="footer">
+		<!-- Site footer -->
+		<footer id="mu-footer">
+			<!-- start footer top -->
+			<div class="mu-footer-top">
+				<div class="container">
+					<div class="mu-footer-top-area">
+						<div class="row">
+							<div class="col-lg-4 col-md-4 col-sm-4">
+								<div class="mu-footer-widget">
+									<h4>Danh mục</h4>
+									<ul>
+										<li><a th:href="@{/listVocab}">Từ vựng</a></li>
+										<li><a th:href="@{/listGrammar}">Ngữ pháp</a></li>
+
+									</ul>
+								</div>
+							</div>
+							<div class="col-lg-4 col-md-4 col-sm-4">
+								<div class="mu-footer-widget">
+									<h4>Tài khoản</h4>
+									<ul>
+										<li><a href="">Hồ sơ</a></li>
+										<li><a href="#">Cài đặt</a></li>
+										<li><a href="">Góc học tập</a></li>
+
+									</ul>
+								</div>
+							</div>
+							<!--<div class="col-lg-3 col-md-3 col-sm-3">
+								<div class="mu-footer-widget">
+									<h4>News letter</h4>
+									<p>Get latest update, news & academic offers</p>
+									<form class="mu-subscribe-form">
+										<input type="email" placeholder="Type your Email">
+										<button class="mu-subscribe-btn" type="submit">Subscribe!</button>
+									</form>
+								</div>
+							</div>-->
+							<div class="col-lg-4 col-md-4 col-sm-4">
+								<div class="mu-footer-widget">
+									<h4>Liên hệ chúng tôi</h4>
+									<address>
+										<p>Phone: (415) 453-1568 </p>
+										<p>Email: info@markups.io</p>
+									</address>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</footer>
+	</div>
+</body>
+
+</html>

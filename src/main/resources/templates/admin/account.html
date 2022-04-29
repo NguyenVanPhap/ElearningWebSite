@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+
+<head>
+	<meta charset="ISO-8859-1">
+	<title>Quản lý tài khoản</title>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+	<script th:src="@{/js/jquery-1.js}"></script>
+
+
+	<link rel="stylesheet" th:href="@{/css/admin.css}" />
+
+	<link rel="stylesheet" th:href="@{/css/ace.min.css}" class="ace-main-stylesheet" id="main-ace-style" />
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/simplemde/latest/simplemde.min.css">
+	<script src="https://cdn.jsdelivr.net/simplemde/latest/simplemde.min.js"></script>
+
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
+		integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+	<script src="https://stackpath.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+	<link th:href="@{/css/adminheader.css}" rel="stylesheet" />
+
+</head>
+
+<body>
+	<header>
+		<div th:replace="admin/include/header::header"> </div>
+	</header>
+
+	<div class="col-md-1"></div>
+	<div class="col-md-10 animated bounce">
+		<h3 class="page-header">Quản lý Tài khoản</h3>
+
+		<button class="btn btn-success btnThemTaiKhoan">Thêm mới tài
+			khoản</button>
+		<hr>
+		<div class="form-group form-inline">
+			<label for="sel1"><strong>Lọc tài khoản:</strong> </label> <select id="vaiTro" class="form-control">
+				<th:block th:each="role : ${listRole}">
+					<option th:value="${role.value}" th:text="${role}"></option>
+				</th:block>
+			</select>
+		</div>
+		<hr>
+
+		<table class="table table-hover taiKhoanTable" style="text-align: center;">
+			<thead>
+				<tr>
+					<th>Mã ND</th>
+					<th>Họ tên</th>
+					<th>Email</th>
+					<th>Số điện thoại</th>
+					<th>Địa chỉ</th>
+					<th>Vai trò</th>
+					<th></th>
+				</tr>
+
+			</thead>
+			<tbody>
+			</tbody>
+
+		</table>
+	</div>
+	<div class="row col-md-6">
+		<form class="taiKhoanForm" id="form">
+			<div>
+				<div class="modal fade" id="taiKhoanModal" tabindex="-1" role="dialog"
+					aria-labelledby="exampleModalLabel" aria-hidden="true" data-backdrop="static" data-keyboard="false">
+					<div class="modal-dialog" role="document">
+						<div class="modal-content">
+							<div class="modal-header">
+								<h5 class="modal-title" id="exampleModalLabel">Tạo mới tài
+									khoản</h5>
+								<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+									<span aria-hidden="true">&times;</span>
+								</button>
+							</div>
+							<div class="modal-body">
+								<!-- 								<div class="form-group">
+									<input type="hidden" class="form-control" name="id" />
+								</div> -->
+								<div class="form-group">
+									<label for="name">Email</label> <input type="email" class="form-control"
+										name="email" required />
+								</div>
+								<div class="form-group">
+									<label for="name">Mật khẩu:(8-32 ký tự)</label> <input type="password"
+										class="form-control" name="password" required />
+								</div>
+								<div class="form-group">
+									<label for="name">Nhắc lại mật khẩu:</label> <input type="password"
+										class="form-control" name="confirmPassword" required />
+								</div>
+
+								<div class="form-group">
+									<label for="name">Chọn vai trò:</label>
+
+									<th:block th:each="role : ${listRole}">
+
+										<label class="radio-inline">
+											<input type="radio" name="vaiTro" th:value="${role.value}"
+												th:text="${role}" checked="checked">
+
+										</label>
+									</th:block>
+
+								</div>
+
+								<div class="form-group">
+									<label for="name">Họ tên:</label> <input type="text" class="form-control"
+										name="hoTen" required />
+								</div>
+								<div class="form-group">
+									<label for="name">Số điện thoại:</label> <input type="text" class="form-control"
+										name="sdt" required />
+								</div>
+								<div class="form-group">
+									<label for="name">Địa chỉ:</label> <input type="text" class="form-control"
+										name="diaChi" required />
+								</div>
+
+
+								<div class="modal-footer">
+									<button type="button" class="btn btn-secondary" data-dismiss="modal">Hủy</button>
+									<input class="btn btn-primary" id="btnSubmit" type="button" value="Xác nhận" />
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</form>
+	</div>
+	</div>
+	<!-- footer section -->
+	<!--<section class="">
+		<div th:replace="client/include/footer::footer"> </div>
+	</section>-->
+	<!-- footer section -->
+
+
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.serializeJSON/2.9.0/jquery.serializejson.js"></script>
+	<script th:src="@{/js/admin/accountmanagement.js}"></script>
+</body>
+
+</html>

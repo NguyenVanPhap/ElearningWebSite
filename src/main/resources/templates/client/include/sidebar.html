@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity">
+
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Document</title>
+</head>
+
+<body>
+
+	<div th:fragment="sidebar">
+		<div class="side-bar d-md-flex align-items-stretch">
+
+			<nav id="sidebar">
+				<div class="p-4 pt-5">
+					<h5 Class="pagetitle">Danh mục</h5>
+					<ul class="list-unstyled components mb-5">
+						<li>
+							<a href="#pageSubmenu1" data-toggle="collapse" aria-expanded="false"
+								class="dropdown-toggle">Chuỗi bài giảng</a>
+							<ul class="collapse list-unstyled" id="pageSubmenu1">
+								<li><a href="#"><span class="fa fa-chevron-right mr-2"></span> Từ vựng</a></li>
+								<li><a href="#"><span class="fa fa-chevron-right mr-2"></span> Ngữ pháp</a></li>
+							</ul>
+						</li>
+						<li>
+							<a href="#pageSubmenu2" data-toggle="collapse" aria-expanded="false"
+								class="dropdown-toggle">Test Online</a>
+							<ul class="collapse list-unstyled" id="pageSubmenu2">
+								<li><a href="#"><span class="fa fa-chevron-right mr-2"></span> Skill Test</a></li>
+								<li><a href="#"><span class="fa fa-chevron-right mr-2"></span> Full Test</a></li>
+							</ul>
+						</li>
+
+					</ul>
+
+					<div class="mb-5">
+						<h5>Newsletter</h5>
+						<form action="#" class="subscribe-form">
+							<div class="form-group d-flex">
+								<div class="icon"><span class="icon-paper-plane"></span></div>
+								<input type="text" class="form-control" placeholder="Enter Email Address">
+							</div>
+						</form>
+					</div>
+				</div>
+
+			</nav>
+
+		</div>
+</body>
+
+</html>

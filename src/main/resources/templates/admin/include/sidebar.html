@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Document</title>
+</head>
+
+<body>
+
+	<div th:fragment="sidebar">
+		<div >
+			<div class="col-md-3">
+
+				<div id="sidebar">
+					<div class="container-fluid tmargin">
+						<div class="input-group">
+
+						</div>
+					</div>
+
+					<ul class="nav navbar-nav side-bar">
+
+						<li class="side-bar tmargin">
+							<a th:href="@{/admin/grammar}">
+								<span class="glyphicon glyphicon-shopping-cart">&nbsp;</span>Quản lý bài grammar</a>
+						</li>
+						<li class="side-bar tmargin">
+							<a th:href="@{/admin/vocab}">
+								<span class="glyphicon glyphicon-shopping-cart">&nbsp;</span>Quản lý bài từ vựng</a>
+						</li>
+						<li class="side-bar tmargin">
+							<a th:href="@{/admin/cources}">
+								<span class="glyphicon glyphicon-shopping-cart">&nbsp;</span>Quản lý khóa học</a>
+						</li>
+						<li class="side-bar tmargin">
+							<a th:href="@{/admin/grammar}">
+								<span class="glyphicon glyphicon-shopping-cart">&nbsp;</span>Quản lý bài đọc</a>
+						</li>
+						
+						<li class="side-bar tmargin">
+							<a th:href="@{/admin/grammar}">
+								<span class="glyphicon glyphicon-shopping-cart">&nbsp;</span>Thông tin người dùng</a>
+						</li>
+						
+						<li class="side-bar tmargin">
+							<a th:href="@{/admin/grammar}">
+								<span class="glyphicon glyphicon-shopping-cart">&nbsp;</span>Quản lý tài khoản</a>
+						</li>
+						
+
+	
+					</ul>
+				</div>
+			</div>
+		</div>
+	</div>
+</body>
+
+</html>

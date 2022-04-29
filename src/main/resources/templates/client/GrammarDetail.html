@@ -1,0 +1,237 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity">
+
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+	<title>Hướng dẫn ngữ pháp chi tiết</title>
+
+
+
+	<script th:src="@{/js/html5shiv.js}"></script>
+
+	<!-- bootstrap core css -->
+	<link rel="stylesheet" type="text/css" th:href="@{/css/bootstrap.css}" />
+	<!-- progress barstle -->
+	<link rel="stylesheet" th:href="@{/css/css-circular-prog-bar.css}">
+	<!-- fonts style -->
+	<link href="https://fonts.googleapis.com/css?family=Poppins:400,700&display=swap" rel="stylesheet">
+	<!-- font wesome stylesheet -->
+	<link rel="stylesheet" th:href="@{https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css}">
+	<!-- Custom styles for this template -->
+	<!-- responsive style -->
+	<link th:href="@{/css/responsive.css}" rel="stylesheet" />
+	<link rel="stylesheet" th:href="@{/css/css-circular-prog-bar.css}">
+
+	<link rel="stylesheet" th:href="@{/css/header/header.css}">
+
+	<link th:href="@{/css/style.css}" rel="stylesheet" />
+
+	<script th:src="@{/js/jquery-1.js}"></script>
+
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
+		integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js"></script>
+		
+	<script th:src="@{/js/client/commentgrammar.js}"></script>
+	<script th:src="@{/js/client/momentcmt.js}"></script>
+	<script type="text/javascript" th:src="@{/js/jquery-3.4.1.min.js}"></script>
+	<style type="text/css">
+		.showtext {
+			text-align: auto;
+			padding-top: 0.5em;
+			padding-right: 1em;
+			padding-bottom: 0.5em;
+			padding-left: 1em;
+		}
+		.hidden{
+			display: none;
+		}
+		.circle{
+			/* border: 1px #d4d4d4 solid; */
+			padding: 7px;
+			border-radius:50%;
+			-moz-border-radius:50%;
+			-webkit-border-radius:50%;
+		}
+	</style>
+
+	<!--<script type="text/javascript">
+		$(document).ready(function () {
+			//comment grammar			
+			$('#btnComment').click(function () {
+
+				var test = $("#contentComment").val();
+				var grammarid = $("#id_bai_grammar").val();
+				var baseUrl = $('#baseUrl').val();
+
+				$.ajax({
+					dataType: "json",
+					type: 'POST',
+					url: baseUrl + "/grammar/ajaxCmtGram/" + test + "/" + grammarid,
+
+					success: function (result) {
+
+						var obj = JSON.parse(result);
+
+						var name = "<h4 style='color:red'>" + obj.nguoidung + "</h4> ";
+						var content = "<textarea disabled class='input-xxlarge showtext' rows='3' name='cmtgrammarcontent' >" + obj.cmtgrammarcontent + "</textarea>";
+
+						$('#listcomment').append(name);
+						$('#listcomment').append(content);
+
+					},
+					error: function (e) {
+						alert("error");
+						console.log("ERROR: ", e);
+					}
+				});
+
+			});
+
+		});
+	</script>-->
+
+
+</head>
+
+<body>
+
+	<!--Header
+==========================-->
+
+	<div th:replace="client/include/header::header"> </div>
+	<input id="baseUrl" value="${pageContext.request.contextPath}" style="display: none;" />
+	<!--/End Headter-->
+
+	<!-- Page container -->
+
+	<div class="container mybackground">
+		<!--PAGE TITLE-->
+
+		<div class="row">
+			<div class="span12">
+				<div class="page-header">
+					<h4 class="pagetitle">Bài hướng dẫn học ngữ pháp</h4>
+				</div>
+			</div>
+
+			<a class="hidden" id="currentgrammar" th:text="${baigrammar.getGrammarId()}" th:value="${baigrammar.getGrammarId()}"></a>
+		</div>
+
+		<!-- /. PAGE TITLE-->
+
+
+
+		<div class="row">
+
+			<!--/Start Blog Post-->
+
+			<div class="col-sm-9">
+				<div class="blog-post">
+					<h3 style="text-align: left; color: black" th:text="${baigrammar.getGrammarName()}">Chủ đề:</h3>
+
+
+					<div class="postmetadata">
+						<!--<ul>
+							<li><i class="icon-user"></i> <a href="#">IT-HCMUTE</a></li>
+							<li><i class="icon-calendar"></i><a href="#">October, 2021</a></li>
+						</ul>-->
+					</div>
+					<!--	<img src="@{/images/vocabulary.jpg}" style="height: 330px; width: 870px">-->
+					<div class="row" style="text-align: justify;">
+						<div class="span3"></div>
+						<div class="span9" th:utext="${baigrammar.getContentHTML()}"></div>
+
+					</div>
+				</div>
+			</div>
+
+			<!--/End Blog Post-->
+
+			<!-- Start Categories -->
+			<div class="col-sm-3">
+				<div th:replace="client/include/sidebar::sidebar"> </div>
+			</div>
+		</div>
+		<!-- End Categories -->
+	</div>
+	<!-- Start Comment -->
+
+	<div class="row">
+
+		<th:block sec:authorize="isAnonymous()">
+			<form>
+				<fieldset>
+					<h3>Bình luận</h3>
+
+					<textarea class="form-control" rows="2" cols="100"
+						placeholder="Viết bình luận đánh giá về bài đăng này..." name="comment" disabled
+						style="text-align: left;">Đăng nhập để bình luận bài viết
+					</textarea>
+					<br>
+					<button type="button" class="btn btn-primary" disabled>Đăng
+						bình luận</button>
+				</fieldset>
+
+			</form>
+
+		</th:block>
+		<th:block sec:authorize="isAuthenticated()">
+			<!--  	<input type="hidden" id="user_id" name="user_id" value="${currentUser.id}"/> -->
+			<input type="hidden" id="id_bai_grammar" th:value="${baigrammar.getGrammarId()}" />
+
+			<div class="blog-spot">
+				<div>
+					<h3>Bình luận</h3>
+					<textarea id="contentComment" class="form-control" rows="2" cols="100" name="contentComment"
+						placeholder="Viết bình luận đánh giá về bài đăng này..."></textarea>
+
+				</div>
+				<br>
+				<div>
+					<button id="btnComment" type="button" class="btn btn-primary">Đăng
+						bình luận</button>
+				</div>
+			</div>
+		</th:block>
+		<hr>
+		<br />
+		<!-- Nội dung commnetn -->
+		<h1 id="testajax"></h1>
+	</div>
+
+	<div class="row">
+		<div class="col-md-10">
+			<table class="table table-hover " id="tableGrammar">
+				<tbody id="lstcommentgrammar">
+				</tbody>
+			</table>
+		</div>
+	</div>
+	<!-- End Comment -->
+	<!-- End Page Container -->
+	<br>
+	<br>
+	<!-- <script>
+	window.onload = function(){
+		let dates = document.querySelectorAll(".my-date > i")
+		for (let i = 0; i< dates.length; i++){
+			let d = dates[i]
+			d.innerText = moment(d.innerText).fromNow()
+		}
+	}
+</script> -->
+	<!-- footer section -->
+	<section class="">
+		<div th:replace="client/include/footer::footer"> </div>
+	</section>
+	<!-- footer section -->
+
+
+</body>
+
+</html>

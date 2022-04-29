@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+
+<head>
+	<meta charset="ISO-8859-1">
+	<title>Chi tiết khóa học</title>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+	<meta charset="utf-8" />
+	<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+	<!-- Mobile Metas -->
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+	<!-- Site Metas -->
+	<meta name="keywords" content="" />
+	<meta name="description" content="" />
+	<meta name="author" content="" />
+
+
+	<script th:src="@{/js/html5shiv.js}"></script>
+	<!-- bootstrap core css -->
+	<link rel="stylesheet" type="text/css" th:href="@{/css/bootstrap.css}" />
+	<!-- progress barstle -->
+	<link rel="stylesheet" th:href="@{/css/css-circular-prog-bar.css}">
+	<!-- fonts style -->
+	<link href="https://fonts.googleapis.com/css?family=Poppins:400,700&display=swap" rel="stylesheet">
+	<!-- font wesome stylesheet -->
+	<link rel="stylesheet" th:href="@{https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css}">
+	<!-- Custom styles for this template -->
+	<!-- responsive style -->
+	<link th:href="@{/css/responsive.css}" rel="stylesheet" />
+	<link rel="stylesheet" th:href="@{/css/css-circular-prog-bar.css}">
+
+	<link rel="stylesheet" th:href="@{/css/header/header.css}">
+
+	<link th:href="@{/css/style.css}" rel="stylesheet" />
+
+	<script th:src="@{/js/jquery-1.js}"></script>
+
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
+		integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+
+	<!--<link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/bulma/0.7.5/css/bulma.css'>-->
+
+	<script type="text/javascript" th:src="@{/js/jquery-3.4.1.min.js}"></script>
+	<style type="text/css">
+		.list {
+			background-color: white;
+			border-radius: 4px;
+			box-shadow: 0 2px 3px rgba(10, 10, 10, 0.1), 0 0 0 1px rgba(10, 10, 10, 0.1);
+		}
+
+		.list-item {
+			display: block;
+			padding: 0.5em 1em;
+		}
+
+		.list-item:not(a) {
+			color: #4a4a4a;
+		}
+
+		.list-item:first-child {
+			border-top-left-radius: 4px;
+			border-top-right-radius: 4px;
+		}
+
+		.list-item:last-child {
+			border-bottom-left-radius: 4px;
+			border-bottom-right-radius: 4px;
+		}
+
+		.list-item:not(:last-child) {
+			border-bottom: 1px solid #dbdbdb;
+		}
+
+		.list-item.is-active {
+			background-color: #3273dc;
+			color: #fff;
+		}
+
+		.content .panel-heading {
+			padding: 10px 25px;
+		}
+
+		.myli li::marker {
+			content: "› ";
+			color: hotpink;
+		}
+
+		.hidden {
+			display: none;
+		}
+
+		.error-message {
+			color: red;
+		}
+
+		.anchor {
+			display: block;
+			height: 115px;
+			/*same height as header*/
+			margin-top: -115px;
+			/*same height as header*/
+			visibility: hidden;
+		}
+
+		.imageGrammar {
+			float: left;
+			height: 150px;
+			width: 250px;
+			margin-bottom: 25px;
+		}
+	</style>
+	<script type="text/javascript">
+		function Search() {
+
+			var baseUrl = document.getElementById('baseUrl').value;
+			var xhttp;
+			var search = document.getElementById('searchGrammar').value;
+
+			//remove special letters
+			var convertSearch = search.replace(/[^a-zA-Z0-9 ]/g, "");
+
+			var url;
+			if (!search == ' ') {
+				url = baseUrl + "/searchGrammar/" + convertSearch;
+			}
+			else url = baseUrl + "/searchGrammar/all";
+
+
+			if (window.XMLHttpRequest) {
+				xhttp = new XMLHttpRequest();
+			}
+			else {
+				xhttp = new ActiveXObject("Microsoft.XMLHTTP");
+			}
+
+			xhttp.onreadystatechange = function () {
+				if (xhttp.readyState == 4) {
+					var data = xhttp.responseText;
+					document.getElementById("resultsearchGrammar").innerHTML = data;
+				}
+			}
+
+			xhttp.open("POST", url, true);
+			xhttp.send();
+
+		}
+	</script>
+
+
+</head>
+
+<body>
+
+
+	<div th:replace="client/include/header::header"> </div>
+	<input style="display:none;" id="baseUrl" value="${pageContext.request.contextPath}" />
+
+
+	<div class="container mybackground">
+		<!--PAGE TITLE-->
+		<hr class="myhr">
+		<div>
+			<div class="row">
+
+			</div>
+
+		</div>
+
+		<!-- /. PAGE TITLE-->
+		<div id="resultsearchGrammar">
+
+			<div class="row">
+				<div class="col-sm-9">
+					<div style="background-color: white;">
+						<h3 th:text="${course.getCourseName()}"></h3>
+
+						<hr>
+						<h4 class="panel-title">
+							<a data-toggle="collapse" href="#" class="collapsed" aria-expanded="true">
+								<i class="fa fa-minus-square" aria-hidden="true"></i>
+								Khóa học này dành cho ai </a>
+						</h4>
+						<p class='list-item' th:text="${course.getTargetUser()}"></p>
+
+						<h4 class="panel-title">
+							<a data-toggle="collapse" href="#" class="collapsed" aria-expanded="true">
+								<i class="fa fa-minus-square" aria-hidden="true"></i>
+								Bạn sẽ học được những gì </a>
+						</h4>
+
+						<p class='list-item' th:text="${course.getContent()}">
+						</p>
+					</div>
+					<br>
+
+					<div class="u-detail-block-left">
+						<div class="u-list-course" id="u-list-course">
+							<div class="content">
+								<div class="panel-group" id="accordion">
+									<div class="panel panel-default">
+										<!-- phần -->
+										<div class="panel-heading">
+											<div class="row">
+												<div class="col-md-12">
+													<h4 class="panel-title">
+														<a data-toggle="collapse" href="#collapse1" class="collapsed"
+															aria-expanded="true">
+															<i class="fa fa-minus-square" aria-hidden="true"></i>
+															Nội dung </a>
+													</h4>
+												</div>
+											</div>
+										</div>
+										<!-- bài -->
+										<div id="collapse1" class="collapse" aria-expanded="true" style="height: 0px;">
+											<div class='list'>
+												<ul>
+
+
+													<th:block th:if="${listLesson}" th:each="list : ${listLesson}">
+														<div class='list-item'>
+															<li>
+																<a th:text="${list.getLessonName()}"
+																	th:href="@{/course/learning(courseId=${course.getCourseId()},start=${list.getLessonId()})}"></a>
+																<!--<a th:text="${list.getLessonName()}"
+																	th:href="@{/course/learning?courseId=}+${course.getCourseId()}+@{?index=}+${list.getLesssonId()}"></a>-->
+															</li>
+														</div>
+													</th:block>
+												</ul>
+											</div>
+											<a>
+											</a>
+										</div><a>
+										</a>
+									</div><a>
+									</a>
+								</div><a>
+								</a>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="col-sm-3">
+					<div th:replace="client/include/sidebar::sidebar"> </div>
+
+				</div>
+			</div>
+
+
+
+
+			<hr class="myhr">
+			<br>
+		</div>
+	</div>
+	<!--/.End Pagination-->
+	</div>
+	<br>
+	<br>
+	<!-- footer section -->
+	<section class="">
+		<div th:replace="client/include/footer::footer"> </div>
+	</section>
+	<!-- footer section -->
+	<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"></script>
+	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
+</body>
+
+</html>

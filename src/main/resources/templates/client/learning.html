@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title></title>
+	<!--<link rel="icon" href="https://fullstack.edu.vn/assets/icon/f8_icon.png" type="image/x-icon">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css"
+		integrity="sha512-NhSC1YmyruXifcj/KFRWoC561YpHpc5Jtzgvbuzx5VozKpWvQ+4nXhPdFgmx8xqexRcpAglTj9sIBWINXa8x5w=="
+		crossorigin="anonymous" referrerpolicy="no-referrer" />-->
+
+	<link rel="stylesheet" type="text/css" th:href="@{/css/lesson/courses.css}" />
+	<link rel="stylesheet" type="text/css" th:href="@{/css/main.css}" />
+	<link rel="stylesheet" type="text/css" th:href="@{/css/base.css}" />
+	<link rel="stylesheet" type="text/css" th:href="@{/css/lesson/all.css}" <!-- bootstrap core css -->
+	<link rel="stylesheet" type="text/css" th:href="@{/css/bootstrap.css}" />
+	<!-- progress barstle -->
+	<link rel="stylesheet" th:href="@{/css/css-circular-prog-bar.css}">
+	<!-- fonts style -->
+
+	<!-- font wesome stylesheet -->
+	<link rel="stylesheet" th:href="@{https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css}">
+	<!-- Custom styles for this template -->
+	<!-- responsive style -->
+	<link th:href="@{/css/responsive.css}" rel="stylesheet" />
+	<link rel="stylesheet" th:href="@{/css/css-circular-prog-bar.css}">
+
+	<link rel="stylesheet" th:href="@{/css/header/header.css}">
+
+	<link th:href="@{/css/style.css}" rel="stylesheet" />
+
+	<script th:src="@{/js/jquery-1.js}"></script>
+
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
+		integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+	<script th:src="@{/js/client/course.js}"></script>
+	<script type="text/javascript" th:src="@{/js/jquery-3.4.1.min.js}"></script>
+	<style type="text/css">
+		ol {
+			counter-reset: li;
+			/* Initiate a counter */
+			list-style: none;
+			/* Remove default numbering */
+			*list-style: decimal;
+			/* Keep using default numbering for IE6/7 */
+			font: 15px 'trebuchet MS', 'lucida sans';
+			padding: 0;
+			margin-bottom: 4em;
+			text-shadow: 0 1px 0 rgba(255, 255, 255, .5);
+		}
+
+		ol ol {
+			margin: 0 0 0 2em;
+			/* Add some left margin for inner lists */
+		}
+
+		.rounded-list a {
+			position: relative;
+			display: block;
+			padding: .4em .4em .4em 2em;
+			*padding: .4em;
+			margin: .5em 0;
+			background: #ddd;
+			color: #444;
+			text-decoration: none;
+			border-radius: .3em;
+			transition: all .3s ease-out;
+		}
+
+		.rounded-list a:hover {
+			background: #eee;
+		}
+
+		.rounded-list a:hover:before {
+			transform: rotate(360deg);
+		}
+
+		.rounded-list a:before {
+			content: counter(li);
+			counter-increment: li;
+			position: absolute;
+			left: -1.3em;
+			top: 50%;
+			margin-top: -1.3em;
+			background: #87ceeb;
+			height: 2em;
+			width: 2em;
+			line-height: 2em;
+			border: .3em solid #fff;
+			text-align: center;
+			font-weight: bold;
+			border-radius: 2em;
+			transition: all .3s ease-out;
+		}
+	</style>
+
+</head>
+
+<body>
+	<div th:replace="client/include/header::header"> </div>
+	<div id="notice">
+
+	</div>
+
+	<div class="page__js-course">
+		<div class="page__js-course-wrap">
+			<h3 class="page-header" style="display: none;" id="StartId" th:text="${currentLessonId}"></h3>
+			<div class="page__js-course-app">
+				<div class="page__js-course-app-video">
+					<div class="page__js-course-app-video-content-wrap">
+						<div class="page__js-course-app-video-content">
+							<iframe width="560" height="315" id="ifrdemolessonSrc" title="YouTube video player"
+								frameborder="0"
+								allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+								allowfullscreen></iframe>
+						</div>
+					</div>
+					<div class="page__js-course-app-video-description">
+						<div class="page__js-course-app-video-description-header">
+							<span class="page__js-course-app-video-header-item-content description-tab">Nội dung</span>
+							<span class="page__js-course-app-video-header-item-about description-tab isclick">Tổng
+								quan</span>
+							<!--<span class="page__js-course-app-video-header-item-note description-tab">Ghi chú</span>
+							<span class="page__js-course-app-video-header-item-relate description-tab">Liên quan</span>-->
+						</div>
+						<div class="page__js-course-app-list-respon description-pane">
+							<div class="page__js-course-app-list-header">
+								<div class="page__js-course-app-list-heading">
+									<span class="page__js-course-app-list-heading-text">HTML,CSS từ Zero đến Hero</span>
+									<!-- <button class="page__js-course-app-list-hidden-btn" style="position:relative">
+                                        <i class="fas fa-arrow-right"></i>
+                                    </button> -->
+								</div>
+								<span class="page__js-course-app-list-header-progress">
+									Hoàn thành
+									<strong class="page__js-course-app-list-current-progress">113</strong>/<strong
+										class="page__js-course-app-list-total-progress">113</strong>
+									bài học
+									<strong class="page__js-course-app-list-percent-progress">(100%)</strong>
+								</span>
+							</div>
+							<div class="page__js-course-app-list-content">
+								<div class="page__js-course-app-list-wrap-respon">
+									<div class="page__js-course-app-list-item-wrap">
+
+
+									</div>
+
+								</div>
+							</div>
+						</div>
+
+
+						<div
+							class="page__js-course-app-video-description-wrap-content description-pane isopen-description">
+							<div class="page__js-course-app-video-description-sub">
+								<span class="page__js-course-app-video-description-sub-text">Tham gia nhóm
+									<a href="https://www.facebook.com/groups/f8official/"> Học IELTS tại Award </a>
+									trên Facebook để cùng nhau trao đổi trong quá trình học tập ❤️</span>
+								<span class="page__js-course-app-video-description-sub-text">Các bạn subscribe kênh
+									Youtube
+									<a href="https://www.youtube.com/c/F8VNOfficial"> Award Official </a>
+									để nhận thông báo khi có các bài học mới nhé ❤️</span>
+							</div>
+
+							<div class="page__js-course-app-video-description-social">
+								<h3 class="page__js-course-app-video-description-comment-quantity">Hỏi đáp</h3>
+								<div class="page__js-course-app-video-description-social-link">
+									CHIA SẺ
+									<div class="page__js-course-app-video-description-social-icon fb">
+										<i class="fab fa-facebook-f"></i>
+									</div>
+									<div class="page__js-course-app-video-description-social-icon mail">
+										<i class="fas fa-envelope"></i>
+									</div>
+									<div class="page__js-course-app-video-description-social-icon sync">
+										<i class="fas fa-link"></i>
+									</div>
+								</div>
+							</div>
+
+							<div class="page__js-course-app-video-description-comment">
+								<div class="page__js-course-app-video-description-comment-user">
+									<img src="https://avatar-redirect.appspot.com/google/101918447405633767798?size=400"
+										alt="" class="page__js-course-app-video-description-comment-user-img">
+								</div>
+								<div class="page__js-course-app-video-description-comment-handle">
+									<input type="text" class="page__js-course-app-video-description-comment-input"
+										placeholder="Bạn có thắc mắc gì trong bài học này">
+									<div class="page__js-course-app-video-description-comment-handle-descript">
+										<div class="page__js-course-app-video-description-comment-handle-code">
+											<i class="fas fa-code"></i>
+											<span>Chèn code</span>
+										</div>
+										<div class="page__js-course-app-video-description-comment-handle-post">
+											<h3 class="page__js-course-app-video-description-comment-cancle">HỦY</h3>
+											<h3 class="page__js-course-app-video-description-comment-complete">BÌNH LUẬN
+											</h3>
+										</div>
+									</div>
+								</div>
+							</div>
+
+							<div class="page__js-course-app-video-comment-app">
+								<div class="page__js-course-app-video-comment-app-wrap">
+
+								</div>
+							</div>
+
+							<div class="page__js-course-app-video-description-footer">
+								<h2>Award.edu.vn</h2>
+								<span>Made with <i class="fas fa-heart"></i> . Powered by Award</span>
+							</div>
+						</div>
+
+					</div>
+					<div class="page__js-course-app-video-display-btn">
+						<i class="fas fa-arrow-left"></i>
+						<span>Nội dung học</span>
+					</div>
+				</div>
+				<div class="page__js-course-app-list">
+					<div class="page__js-course-app-list-header">
+						<div class="page__js-course-app-list-heading">
+							<span class="page__js-course-app-list-heading-text"
+								th:text="${course.getCourseName()}"></span>
+
+						</div>
+						<span class="page__js-course-app-list-header-progress">
+
+						</span>
+						<div class="page__js-course-app-list-heading" style="padding-left: 10%;">
+							<ol class="rounded-list">
+								<th:block th:if="${listLesson}" th:each="list : ${listLesson}">
+
+									<li><a href="#" class="leaningLesson" th:id="${list.getLessonId()}"
+											th:text="${list.getLessonName()}"></a></li>
+								</th:block>
+
+							</ol>
+						</div>
+					</div>
+
+
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<script th:src="@{/course/html-css-course.js}"></script>
+</body>
+
+</html>

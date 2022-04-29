@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<meta charset="ISO-8859-1">
+	<title>Danh sách bài tập nghe</title>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+	<link rel="stylesheet" type="text/css" th:href="@{/css/bootstrap.css}" />
+	<!-- progress barstle -->
+	<link rel="stylesheet" th:href="@{/css/css-circular-prog-bar.css}">
+	<!-- fonts style -->
+	<link href="https://fonts.googleapis.com/css?family=Poppins:400,700&display=swap" rel="stylesheet">
+	<!-- font wesome stylesheet -->
+	<link rel="stylesheet" th:href="@{https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css}">
+	<link th:href="@{/css/responsive.css}" rel="stylesheet" />
+	<link th:href="@{/css/slick.css}" rel="stylesheet" />
+	<link rel="stylesheet" th:href="@{/css/css-circular-prog-bar.css}">
+	<link rel="stylesheet" th:href="@{/css/header/header.css}">
+	<link rel="stylesheet" th:href="@{/css/reading-skill.css}">
+	<link th:href="@{/css/style.css}" rel="stylesheet" />
+	<script th:src="@{/js/jquery-1.js}"></script>
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
+		integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+	<script type="text/javascript" th:src="@{/js/jquery-3.4.1.min.js}"></script>
+	<style type="text/css">
+		.hidden {
+			display: none;
+		}
+
+		.error-message {
+			color: red;
+		}
+
+		.anchor {
+			display: block;
+			height: 115px;
+			/*same height as header*/
+			margin-top: -115px;
+			/*same height as header*/
+			visibility: hidden;
+		}
+
+		.inline {
+			display: inline-block;
+			margin: 10px;
+		}
+	</style>
+</head>
+
+<body>
+	<div th:replace="client/include/header::header"> </div>
+
+
+	<div class="container mybackground">
+		<!--PAGE TITLE-->
+		<div>
+			<div class="row">
+				<div class="col-sm-9">
+					<h5>DANH SÁCH BÀI NGHE</h5>
+				</div>
+			</div>
+		</div>
+
+		<!-- /. PAGE TITLE-->
+		<div class="row">
+			<div class="col-sm-9" style="width: 20%">
+				<div>
+				
+					<div class="inline" style="width: 20%">
+						<select class="form-control" name="partSearch" id="partSearch">
+							<option value="1">Part 1</option>
+							<option value="2">Part 2</option>
+							<option value="3">Part 3</option>
+						</select>
+					</div>
+					<div class="inline" style="width: 20%">
+						<select class="form-control" name="levelSearch" id="levelSearch">
+							<option value="1">300-500</option>
+							<option value="2">500-700</option>
+							<option value="3">700-800</option>
+						</select>
+					</div>
+					<button type="button" class="btn btn-primary" id="btnDuyetBaiDoc">Tìm
+						kiếm</button>
+				</div>
+				<hr>
+				<!--Blog Post-->
+				<ul class="danhSach" style="text-align: left; padding-left: 45px;">
+				</ul>
+				<p class="hidden" id="pTag">Không có dữ liệu</p>
+
+
+				<div class="career-search mb-60">
+					<div class="filter-result listListeningExercise">
+
+					</div>
+				</div>
+				<div class="center">
+					<div class="pagination">
+					
+					</div>
+				</div>
+			</div>
+			<div class="col-sm-3">
+				<div th:replace="client/include/sidebar::sidebar"> </div>
+
+			</div>
+		</div>
+	</div>
+	</div>
+	<br><br><br><br><br><br><br><br>
+
+	<!-- footer section -->
+	<section class="">
+		<div th:replace="client/include/footer::footer"> </div>
+	</section>
+	<script src="http://ajax.aspnetcdn.com/ajax/jquery.validate/1.11.1/jquery.validate.min.js"></script>
+	<script th:src="@{/js/client/skill-test/listening.js}"></script>
+
+</body>
+
+</html>
