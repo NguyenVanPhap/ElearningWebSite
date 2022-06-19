@@ -27,7 +27,7 @@ import com.elearning.entities.NguoiDung;
 import com.elearning.service.GrammarService;
 /*import com.elearning.service.CommentGrammarService;*/
 import com.elearning.service.NguoiDungService;
-
+@CrossOrigin
 @Controller
 public class grammarController {
 	@Autowired

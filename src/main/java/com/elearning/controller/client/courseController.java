@@ -16,7 +16,7 @@ import com.elearning.entities.Lesson;
 import com.elearning.entities.Course;
 import com.elearning.service.CourseService;
 import com.elearning.service.LessonService;
-
+@CrossOrigin
 @Controller
 
 @RequestMapping("/course")

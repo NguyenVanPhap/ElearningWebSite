@@ -31,7 +31,7 @@ import com.elearning.entities.NguoiDung;
 import com.elearning.service.NguoiDungService;
 import com.elearning.entities.ResponseObject;
 import com.elearning.dto.*;
-
+@CrossOrigin
 @Controller
 @SessionAttributes("loggedInUser")
 public class clientController {
